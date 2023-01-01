@@ -109,3 +109,17 @@ p{
 	cursor: pointer;
 	margin: auto 700px auto 700px;
 }
+
+.boxnext{
+	font-family: 'Atkinson Hyperlegible', sans-serif;
+	font-size:30px;
+	background-color:#D4D4D4;
+	text-align:center;
+	float:center;
+	vertical-align:bottom;
+	border: none;
+	display: inline-block;
+ 	border-radius: 25px;
+	padding: 20px;
+	margin: auto 700px auto 700px;
+}
