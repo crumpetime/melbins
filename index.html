@@ -1,0 +1,276 @@
+<DOCTYPE html>
+<head>
+	<link rel = "stylesheet" href = "sheet.css">
+	<title> Garbage tracker </title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
+	<meta http-equiv="refresh" content="120">
+	<link rel = "icon" id = "favicon" href = "icons/favi_blank.ico" type = "image/x-icon">
+</head>
+
+<body>
+
+	<p> Date: </p>
+	<p id = "time"></p>
+
+	<p id = "test"></p>
+
+	<p> This week: </p>
+
+	<p id = "r"></p>
+	<p id = "g"></p>
+	<p id = "y"></p>
+	
+	<div class = "container">
+		<div class  = "binred" class = "bininactive" id = "binr"> <p class = "bin" class = "bininactivet" id = "binrt"> R </p> </div>
+
+		<div class  = "bingreen" class = "bininactive" id = "bing"> <p class = "bin" class = "bininactivet" id = "binrg"> G </p> </div>
+
+		<div class  = "binyellow" class = "bininactive" id = "biny"> <p class = "bin" class = "bininactivet" id = "binry"> Y </p> </div>
+	</div>
+	
+	<p> Next bins: </p>
+	
+	<div class = "container_bottom">
+
+		<button id = "nb1" class = "button" onclick = ""></button>
+		<button id = "nb2" class = "button" onclick = ""></button>
+
+	</div>	
+
+	<script> 
+
+			
+		//while (true){
+			let xsr;
+			let xsg;
+			let xsy;
+			let x;
+			let r;
+			let g;
+			let y;
+			let t;
+			let t_current;
+			let r1;
+			let g1;
+			let y1;
+			let min;
+			let min2;
+			const bcurrent = [];
+			const favi = document.getElementById("favicon");
+			const time = new Date();
+			//document.getElementById("time").innerHTML = time.getTime();
+			x = Math.ceil(parseInt(time.getTime())/86400000);
+			//Math.ceil(parseInt(time.getTime())/86400000);
+			//Math.ceil(1672837200000/86400000);
+			//Math.ceil(1673442000000/86400000);
+			t_current = String(new Date(time.getTime()))
+			t = parseInt(time.getTime())
+
+			xsr = (parseInt((x - Math.abs(parseInt(Math.ceil(1671627600000/86400000))))))
+			xsg = (parseInt((x - Math.abs(parseInt(Math.ceil(1672232400000/86400000))))))
+			xsy = (parseInt((x - Math.abs(parseInt(Math.ceil(1672232400000/86400000))))))
+			
+			document.getElementById("test").innerHTML = t_current.slice(0,15);
+			//r = parseInt((x - Math.abs(parseInt(Math.ceil(1671627600000/86400000)))) % 14);
+			//g = parseInt((x - Math.abs(parseInt(Math.ceil(1671627600000/86400000)))) % 7);
+			//y = parseInt((x - Math.abs(parseInt(Math.ceil(1672232400000/86400000)))) % 14);
+
+
+			r1 = (((Math.ceil(xsr/14)*14)+19348))
+			g1 = (((Math.ceil(xsg/7)*7)+19355))
+			y1 = (((Math.ceil(xsy/14)*14)+19355))
+			
+
+
+			if (r1-x+1 < 5){
+				document.getElementById("binr").classList.add("binred");	
+				document.getElementById("binr").classList.remove("bininactive");
+				document.getElementById("binrt").classList.add("bin");
+				document.getElementById("binrt").classList.remove("bininactivet");
+				bcurrent.push("Red");
+			} else {
+
+				document.getElementById("binr").classList.remove("binred");
+				document.getElementById("binr").classList.add("bininactive");	
+				document.getElementById("binrt").classList.add("bininactivet");
+				document.getElementById("binrt").classList.remove("bin");		
+			}
+			
+			if (g1-x+1 < 5){
+	
+				document.getElementById("bing").classList.add("bingreen");
+				document.getElementById("bing").classList.remove("bininactive");
+				document.getElementById("binrg").classList.add("bin");
+				document.getElementById("binrg").classList.remove("bininactivet");
+				bcurrent.push("Green");
+			} else {
+	
+				document.getElementById("bing").classList.add("bininactive");	
+				document.getElementById("bing").classList.remove("bingreen");	
+				document.getElementById("binrg").classList.add("bininactivet");
+				document.getElementById("binrg").classList.remove("bin");
+			}
+			
+			if (y1-x+1 <5){
+				document.getElementById("biny").classList.add("binyellow");
+				document.getElementById("biny").classList.remove("bininactive");
+				document.getElementById("binry").classList.add("bin");
+				document.getElementById("binry").classList.remove("bininactivet");
+				bcurrent.push("Yellow");
+			} else {
+
+				document.getElementById("biny").classList.add("bininactive");
+				document.getElementById("biny").classList.remove("binyellow");	
+				document.getElementById("binry").classList.remove("bin");
+				document.getElementById("binry").classList.add("bininactivet");	
+			}
+				
+
+			
+
+		
+			console.log(x)
+			console.log(r1)
+			console.log(g1)
+			console.log(y1)
+			console.log(r1-x)
+			console.log(g1-x)
+			console.log(y1-x)
+			console.log(xsr)
+			console.log(xsg)
+			console.log(xsy)
+			console.log(r)
+			console.log(g)
+			console.log(y)
+			console.log(r1/86400000)
+			console.log(g1/86400000)
+			console.log(y1/86400000)
+		
+			r1 = r1 * 86400000
+			g1 = g1 * 86400000
+			y1 = y1 * 86400000
+
+			min = (Math.min(r1,g1,y1))
+			
+			if (min == r1){
+				const c1 = String(new Date(r1));
+				const c2 = c1.slice(0,15);
+				document.getElementById("nb1").innerHTML = c2.concat(' (Red)');
+				min2 = (Math.min(g1,y1));
+					if (min2 == g1){
+						const b1 = String(new Date(g1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Green)');
+					}
+					else{
+						const b1 = String(new Date(y1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Yellow)');
+					}
+			}
+
+			else if (min == g1){
+				const c1 = String(new Date(g1));
+				const c2 = c1.slice(0,15);
+				document.getElementById("nb1").innerHTML = c2.concat(' (Green)');
+				min2 = (Math.min(r1,y1));
+					if (min2 == r1){
+						const b1 = String(new Date(r1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Red)');
+					}
+					else{
+						const b1 = String(new Date(y1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Yellow)');
+					}
+			}
+			
+
+			else if (min == y1){
+				const c1 = String(new Date(y1));
+				const c2 = c1.slice(0,15);
+				document.getElementById("nb1").innerHTML = c2.concat(' (Yellow)');
+				min2 = (Math.min(r1,g1));
+					if (min2 == r1){
+						const b1 = String(new Date(r1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Red)');
+					}
+					else{
+						const b1 = String(new Date(g1));
+						const b2 = b1.slice(0,15);
+						document.getElementById("nb2").innerHTML = b2.concat(' (Green)');
+					}
+			}
+		
+			if (bcurrent.includes("Red")){
+			
+				if (bcurrent.includes("Green")){
+				favi.setAttribute("href", "icons/favi_greenred.ico");
+				}
+				else if( bcurrent.includes("Yellow")){
+				favi.setAttribute("href", "icons/favi_greenyellow.ico");				
+				}
+				else{
+				favi.setAttribute("href", "icons/favi_red.ico");
+				}
+			}
+
+			else if (bcurrent.includes("Yellow")){
+			
+				if (bcurrent.includes("Green")){
+				favi.setAttribute("href", "icons/favi_greenyellow.ico");
+				}
+				else if (bcurrent.includes("Red")){
+				favi.setAttribute("href", "icons/favi_redyellow.ico");			
+				}
+				else{
+				favi.setAttribute("href", "icons/favi_yellow.ico");
+				}
+			}
+
+
+			else if (bcurrent.includes("Green")){
+			
+				if (bcurrent.includes("Yellow")){
+				favi.setAttribute("href", "icons/favi_greenyellow.ico");
+				}
+				else if (bcurrent.includes("Red")){
+				favi.setAttribute("href", "icons/favi_greenred.ico");			
+				}
+				else{
+				favi.setAttribute("href", "icons/favi_green.ico");	
+				}
+			}
+			
+			else{
+				favi.setAttribute("href", "icons/favi_blank.ico");
+			}
+
+			console.log(bcurrent)
+			
+			//function button(){
+
+			//if (min == r1){
+			
+			//x = xsr			
+
+			//}
+
+			//else if (min == g1){
+
+			//x = xsg
+
+			//}
+			
+			//else if (min == y1){
+			
+			//x = xsy			
+
+			//}
+		</script>	
+	</body>
+</html>		
